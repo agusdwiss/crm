@@ -38,7 +38,7 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
         package: "",
         ipAddress: "",
         location: "",
-        status: "ACTIVE",
+        status: "AKTIF",
     });
 
     useEffect(() => {
@@ -163,9 +163,9 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
                                     <SelectValue placeholder="Pilih Status" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="ACTIVE">Active</SelectItem>
-                                    <SelectItem value="SUSPENDED">Suspended</SelectItem>
-                                    <SelectItem value="INACTIVE">Inactive</SelectItem>
+                                    <SelectItem value="AKTIF">AKTIF</SelectItem>
+                                    <SelectItem value="ISOLIR">ISOLIR</SelectItem>
+                                    <SelectItem value="PEMUTUSAN">PEMUTUSAN</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>

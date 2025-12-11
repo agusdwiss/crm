@@ -39,11 +39,11 @@ export default function CustomerList() {
 
     const getStatusColor = (status: string) => {
         switch (status) {
-            case "ACTIVE":
+            case "AKTIF":
                 return "bg-green-500 hover:bg-green-600";
-            case "SUSPENDED":
+            case "ISOLIR":
                 return "bg-red-500 hover:bg-red-600";
-            case "INACTIVE":
+            case "PEMUTUSAN":
                 return "bg-gray-500 hover:bg-gray-600";
             default:
                 return "bg-blue-500";

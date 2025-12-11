@@ -37,7 +37,7 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
         package: "",
         ipAddress: "",
         location: "",
-        status: "ACTIVE",
+        status: "AKTIF",
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,7 +60,7 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
                 package: "",
                 ipAddress: "",
                 location: "",
-                status: "ACTIVE",
+                status: "AKTIF",
             });
             onSuccess();
         } catch (error) {
@@ -157,9 +157,9 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
                                     <SelectValue placeholder="Pilih Status" />
                                 </SelectTrigger>
                                 <SelectContent>
-                                    <SelectItem value="ACTIVE">Active</SelectItem>
-                                    <SelectItem value="SUSPENDED">Suspended</SelectItem>
-                                    <SelectItem value="INACTIVE">Inactive</SelectItem>
+                                    <SelectItem value="AKTIF">AKTIF</SelectItem>
+                                    <SelectItem value="ISOLIR">ISOLIR</SelectItem>
+                                    <SelectItem value="PEMUTUSAN">PEMUTUSAN</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>

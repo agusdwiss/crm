@@ -15,7 +15,7 @@ export class CustomersService {
   create(createCustomerDto: CreateCustomerDto) {
     const customer = this.customersRepository.create({
       ...createCustomerDto,
-      status: createCustomerDto.status as CustomerStatus || CustomerStatus.ACTIVE,
+      status: createCustomerDto.status as CustomerStatus || CustomerStatus.AKTIF,
     });
     return this.customersRepository.save(customer);
   }

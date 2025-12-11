@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
 export enum CustomerStatus {
-    ACTIVE = 'ACTIVE',
-    SUSPENDED = 'SUSPENDED',
-    INACTIVE = 'INACTIVE',
+    AKTIF = 'AKTIF',
+    ISOLIR = 'ISOLIR',
+    PEMUTUSAN = 'PEMUTUSAN',
 }
 
 @Entity({ name: 'customers' })
@@ -29,7 +29,7 @@ export class Customer {
     @Column({
         type: 'enum',
         enum: CustomerStatus,
-        default: CustomerStatus.ACTIVE,
+        default: CustomerStatus.AKTIF,
     })
     status: CustomerStatus;
 
