@@ -20,8 +20,11 @@ export class Customer {
     @Column({ nullable: true })
     package: string;
 
-    @Column({ name: 'ip_address', nullable: true })
-    ipAddress: string;
+    @Column({ name: 'pppoe_username', nullable: true })
+    pppoeUsername: string;
+
+    @Column({ name: 'pppoe_password', nullable: true })
+    pppoePassword: string;
 
     @Column({ nullable: true })
     location: string;

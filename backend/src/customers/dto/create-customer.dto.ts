@@ -16,7 +16,11 @@ export class CreateCustomerDto {
 
     @IsOptional()
     @IsString()
-    ipAddress?: string;
+    pppoeUsername?: string;
+
+    @IsOptional()
+    @IsString()
+    pppoePassword?: string;
 
     @IsOptional()
     @IsString()

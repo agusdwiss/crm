@@ -35,7 +35,8 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
         name: "",
         address: "",
         package: "",
-        ipAddress: "",
+        pppoeUsername: "",
+        pppoePassword: "",
         location: "",
         status: "AKTIF",
     });
@@ -58,7 +59,8 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
                 name: "",
                 address: "",
                 package: "",
-                ipAddress: "",
+                pppoeUsername: "",
+                pppoePassword: "",
                 location: "",
                 status: "AKTIF",
             });
@@ -123,15 +125,27 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="ipAddress" className="text-right">
-                                IP Address
+                            <Label htmlFor="pppoeUsername" className="text-right">
+                                PPPoE User
                             </Label>
                             <Input
-                                id="ipAddress"
-                                value={formData.ipAddress}
+                                id="pppoeUsername"
+                                value={formData.pppoeUsername}
                                 onChange={handleChange}
                                 className="col-span-3"
-                                placeholder="192.168.x.x"
+                                placeholder="username_pppoe"
+                            />
+                        </div>
+                        <div className="grid grid-cols-4 items-center gap-4">
+                            <Label htmlFor="pppoePassword" className="text-right">
+                                PPPoE Pass
+                            </Label>
+                            <Input
+                                id="pppoePassword"
+                                value={formData.pppoePassword}
+                                onChange={handleChange}
+                                className="col-span-3"
+                                placeholder="password_pppoe"
                             />
                         </div>
                         <div className="grid grid-cols-4 items-center gap-4">

@@ -68,7 +68,7 @@ export default function CustomerList() {
                             <TableRow>
                                 <TableHead>Nama</TableHead>
                                 <TableHead>Paket</TableHead>
-                                <TableHead>IP Address</TableHead>
+                                <TableHead>PPPoE User</TableHead>
                                 <TableHead>Status</TableHead>
                                 <TableHead>Lokasi</TableHead>
                                 <TableHead className="text-right">Bergabung</TableHead>
@@ -90,7 +90,7 @@ export default function CustomerList() {
                                     >
                                         <TableCell className="font-medium">{customer.name}</TableCell>
                                         <TableCell>{customer.package || "-"}</TableCell>
-                                        <TableCell>{customer.ipAddress || "-"}</TableCell>
+                                        <TableCell>{customer.pppoeUsername || "-"}</TableCell>
                                         <TableCell>
                                             <Badge className={getStatusColor(customer.status)}>
                                                 {customer.status}

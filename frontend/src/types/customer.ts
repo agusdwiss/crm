@@ -5,7 +5,8 @@ export interface Customer {
     name: string;
     address?: string;
     package?: string;
-    ipAddress?: string;
+    pppoeUsername?: string;
+    pppoePassword?: string;
     location?: string;
     status: CustomerStatus;
     createdAt: string;
@@ -16,7 +17,8 @@ export interface CreateCustomerDto {
     name: string;
     address?: string;
     package?: string;
-    ipAddress?: string;
+    pppoeUsername?: string;
+    pppoePassword?: string;
     location?: string;
     status?: CustomerStatus;
 }

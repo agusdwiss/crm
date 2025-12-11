@@ -90,19 +90,15 @@ export default function CustomerDetailPage() {
                     </CardHeader>
                     <CardContent className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="space-y-1">
+                            <div>
                                 <h3 className="text-sm font-medium text-gray-500">Paket Internet</h3>
                                 <p className="text-lg font-semibold">{customer.package || "-"}</p>
                             </div>
-                            <div className="space-y-1">
-                                <h3 className="text-sm font-medium text-gray-500">IP Address</h3>
-                                <p className="font-mono text-lg">{customer.ipAddress || "-"}</p>
-                            </div>
-                            <div className="space-y-1">
+                            <div>
                                 <h3 className="text-sm font-medium text-gray-500">Lokasi</h3>
                                 <p className="text-lg">{customer.location || "-"}</p>
                             </div>
-                            <div className="space-y-1">
+                            <div>
                                 <h3 className="text-sm font-medium text-gray-500">Tanggal Bergabung</h3>
                                 <p className="text-lg">
                                     {new Date(customer.createdAt).toLocaleDateString("id-ID", {
@@ -117,7 +113,22 @@ export default function CustomerDetailPage() {
 
                         <Separator />
 
-                        <div className="space-y-1">
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <h3 className="text-sm font-medium text-gray-500">PPPoE Username</h3>
+                                <p className="font-mono text-lg">{customer.pppoeUsername || "-"}</p>
+                            </div>
+                            <div>
+                                <h3 className="text-sm font-medium text-gray-500">PPPoE Password</h3>
+                                <p className="font-mono text-lg">{customer.pppoePassword || "-"}</p>
+                            </div>
+                        </div>
+
+
+                        <Separator />
+
+                        <div>
                             <h3 className="text-sm font-medium text-gray-500">Alamat Lengkap</h3>
                             <p className="text-lg">{customer.address || "-"}</p>
                         </div>
