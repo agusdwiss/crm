@@ -171,6 +171,6 @@ export default function AddCustomerDialog({ onSuccess }: AddCustomerDialogProps)
                     </DialogFooter>
                 </form>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     );
 }

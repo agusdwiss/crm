@@ -6,9 +6,9 @@ export default function Home() {
       <div className="mx-auto max-w-7xl space-y-8">
         <div className="flex items-center justify-between space-y-2">
           <div>
-            <h2 className="text-3xl font-bold tracking-tight">Dashboard CRM</h2>
+            <h2 className="text-3xl font-bold tracking-tight">Data Pelanggan</h2>
             <p className="text-muted-foreground">
-              Sistem Manajemen Pelanggan
+              Management Data Pelanggan
             </p>
           </div>
         </div>

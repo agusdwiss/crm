@@ -177,6 +177,6 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
                     </DialogFooter>
                 </form>
             </DialogContent>
-        </Dialog>
+        </Dialog >
     );
 }
