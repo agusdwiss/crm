@@ -7,8 +7,10 @@ export class CreateCustomerDto {
     name: string;
 
     @IsOptional()
-    @IsString()
-    address?: string;
+    latitude?: number;
+
+    @IsOptional()
+    longitude?: number;
 
     @IsOptional()
     @IsString()

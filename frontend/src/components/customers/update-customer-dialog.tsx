@@ -4,6 +4,10 @@ import { useEffect, useState } from "react";
 import { Customer, CreateCustomerDto } from "@/types/customer";
 import api from "@/lib/api";
 import { Button } from "@/components/ui/button";
+import dynamic from "next/dynamic";
+
+const MapPicker = dynamic(() => import("@/components/map-picker"), { ssr: false });
+
 import {
     Dialog,
     DialogContent,
@@ -34,11 +38,12 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState<CreateCustomerDto>({
         name: "",
-        address: "",
         package: "",
         pppoeUsername: "",
         pppoePassword: "",
         location: "",
+        latitude: -7.452459,
+        longitude: 110.440814,
         status: "AKTIF",
     });
 
@@ -46,11 +51,12 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
         if (customer) {
             setFormData({
                 name: customer.name,
-                address: customer.address || "",
                 package: customer.package || "",
                 pppoeUsername: customer.pppoeUsername || "",
                 pppoePassword: customer.pppoePassword || "",
                 location: customer.location || "",
+                latitude: customer.latitude ? Number(customer.latitude) : -7.452459,
+                longitude: customer.longitude ? Number(customer.longitude) : 110.440814,
                 status: customer.status,
             });
         }
@@ -62,6 +68,10 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
 
     const handleStatusChange = (value: string) => {
         setFormData({ ...formData, status: value as any });
+    };
+
+    const handleLocationSelect = (lat: number, lng: number) => {
+        setFormData({ ...formData, latitude: lat, longitude: lng });
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -86,7 +96,7 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
                     <Edit className="mr-2 h-4 w-4" /> Edit Informasi
                 </Button>
             </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="sm:max-w-3xl">
                 <form onSubmit={handleSubmit}>
                     <DialogHeader>
                         <DialogTitle>Edit Data Pelanggan</DialogTitle>
@@ -94,94 +104,85 @@ export default function UpdateCustomerDialog({ customer, onSuccess }: UpdateCust
                             Ubah informasi pelanggan di bawah ini.
                         </DialogDescription>
                     </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="name" className="text-right">
-                                Nama
-                            </Label>
-                            <Input
-                                id="name"
-                                value={formData.name}
-                                onChange={handleChange}
-                                className="col-span-3"
-                                required
-                            />
+                    <div className="grid gap-6 py-4 md:grid-cols-2">
+                        {/* Kolom Kiri - Informasi Dasar */}
+                        <div className="space-y-4">
+                            <div className="grid gap-2">
+                                <Label htmlFor="name">Nama</Label>
+                                <Input
+                                    id="name"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="package">Paket</Label>
+                                <Input
+                                    id="package"
+                                    value={formData.package}
+                                    onChange={handleChange}
+                                    placeholder="Misal: 50 Mbps"
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="pppoeUsername">PPPoE User</Label>
+                                <Input
+                                    id="pppoeUsername"
+                                    value={formData.pppoeUsername}
+                                    onChange={handleChange}
+                                    placeholder="username_pppoe"
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="pppoePassword">PPPoE Pass</Label>
+                                <Input
+                                    id="pppoePassword"
+                                    value={formData.pppoePassword}
+                                    onChange={handleChange}
+                                    placeholder="password_pppoe"
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="location">Lokasi (Teks)</Label>
+                                <Input
+                                    id="location"
+                                    value={formData.location}
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className="grid gap-2">
+                                <Label htmlFor="status">Status</Label>
+                                <Select
+                                    onValueChange={handleStatusChange}
+                                    value={formData.status}
+                                >
+                                    <SelectTrigger>
+                                        <SelectValue placeholder="Pilih Status" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                        <SelectItem value="AKTIF">AKTIF</SelectItem>
+                                        <SelectItem value="ISOLIR">ISOLIR</SelectItem>
+                                        <SelectItem value="PEMUTUSAN">PEMUTUSAN</SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </div>
                         </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="address" className="text-right">
-                                Alamat
-                            </Label>
-                            <Input
-                                id="address"
-                                value={formData.address}
-                                onChange={handleChange}
-                                className="col-span-3"
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="package" className="text-right">
-                                Paket
-                            </Label>
-                            <Input
-                                id="package"
-                                value={formData.package}
-                                onChange={handleChange}
-                                className="col-span-3"
-                                placeholder="Misal: 50 Mbps"
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="pppoeUsername" className="text-right">
-                                PPPoE User
-                            </Label>
-                            <Input
-                                id="pppoeUsername"
-                                value={formData.pppoeUsername}
-                                onChange={handleChange}
-                                className="col-span-3"
-                                placeholder="username_pppoe"
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="pppoePassword" className="text-right">
-                                PPPoE Pass
-                            </Label>
-                            <Input
-                                id="pppoePassword"
-                                value={formData.pppoePassword}
-                                onChange={handleChange}
-                                className="col-span-3"
-                                placeholder="password_pppoe"
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="location" className="text-right">
-                                Lokasi
-                            </Label>
-                            <Input
-                                id="location"
-                                value={formData.location}
-                                onChange={handleChange}
-                                className="col-span-3"
-                            />
-                        </div>
-                        <div className="grid grid-cols-4 items-center gap-4">
-                            <Label htmlFor="status" className="text-right">
-                                Status
-                            </Label>
-                            <Select
-                                onValueChange={handleStatusChange}
-                                value={formData.status}
-                            >
-                                <SelectTrigger className="col-span-3">
-                                    <SelectValue placeholder="Pilih Status" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="AKTIF">AKTIF</SelectItem>
-                                    <SelectItem value="ISOLIR">ISOLIR</SelectItem>
-                                    <SelectItem value="PEMUTUSAN">PEMUTUSAN</SelectItem>
-                                </SelectContent>
-                            </Select>
+
+                        {/* Kolom Kanan - Peta */}
+                        <div className="space-y-2">
+                            <Label>Titik Lokasi</Label>
+                            <div className="rounded-md border overflow-hidden">
+                                <MapPicker
+                                    latitude={formData.latitude}
+                                    longitude={formData.longitude}
+                                    onLocationSelect={handleLocationSelect}
+                                />
+                            </div>
+                            <p className="text-xs text-gray-500">
+                                Klik pada peta untuk mengubah lokasi pelanggan.<br />
+                                Lat: {formData.latitude?.toFixed(6)}, Long: {formData.longitude?.toFixed(6)}
+                            </p>
                         </div>
                     </div>
                     <DialogFooter>

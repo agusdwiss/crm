@@ -3,7 +3,8 @@ export type CustomerStatus = 'AKTIF' | 'ISOLIR' | 'PEMUTUSAN';
 export interface Customer {
     id: number;
     name: string;
-    address?: string;
+    latitude?: number;
+    longitude?: number;
     package?: string;
     pppoeUsername?: string;
     pppoePassword?: string;
@@ -15,7 +16,8 @@ export interface Customer {
 
 export interface CreateCustomerDto {
     name: string;
-    address?: string;
+    latitude?: number;
+    longitude?: number;
     package?: string;
     pppoeUsername?: string;
     pppoePassword?: string;

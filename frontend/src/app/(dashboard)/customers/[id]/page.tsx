@@ -10,6 +10,9 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Trash2 } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import UpdateCustomerDialog from "@/components/customers/update-customer-dialog";
+import dynamic from "next/dynamic";
+
+const MapView = dynamic(() => import("@/components/map-view"), { ssr: false });
 
 export default function CustomerDetailPage() {
     const params = useParams();
@@ -129,8 +132,23 @@ export default function CustomerDetailPage() {
                         <Separator />
 
                         <div>
-                            <h3 className="text-sm font-medium text-gray-500">Alamat Lengkap</h3>
-                            <p className="text-lg">{customer.address || "-"}</p>
+                            <h3 className="text-sm font-medium text-gray-500 mb-2">Lokasi Koordinat Pelanggan</h3>
+                            <div className="h-[400px] w-full rounded-md border overflow-hidden">
+                                {customer.latitude && customer.longitude ? (
+                                    <MapView
+                                        latitude={Number(customer.latitude)}
+                                        longitude={Number(customer.longitude)}
+                                        popupText={customer.name}
+                                    />
+                                ) : (
+                                    <div className="h-full w-full bg-gray-100 flex items-center justify-center text-gray-400">
+                                        Data koordinat belum tersedia
+                                    </div>
+                                )}
+                            </div>
+                            <p className="text-sm text-gray-500 mt-1 font-mono">
+                                Lat: {customer.latitude || "-"}, Long: {customer.longitude || "-"}
+                            </p>
                         </div>
 
                         <Separator />

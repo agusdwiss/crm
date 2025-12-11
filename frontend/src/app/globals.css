@@ -1,6 +1,29 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+/* Force Leaflet to respect stacking contexts if needed, though z-[1000] on dialog should fix it. */
+.leaflet-container {
+  z-index: 10 !important;
+}
+
+.leaflet-pane {
+  z-index: 200 !important;
+  /* Lower than default 400 */
+}
+
+.leaflet-top,
+.leaflet-bottom {
+  z-index: 300 !important;
+  /* Lower than default 1000 */
+}
+
+/* Ensure Modals are higher */
+[data-radix-popper-content-wrapper],
+[data-slot="dialog-content"],
+[data-slot="dialog-overlay"] {
+  z-index: 1000 !important;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -116,6 +139,7 @@
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
